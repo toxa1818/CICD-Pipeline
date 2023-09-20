@@ -28,7 +28,7 @@ pipeline {
                     }
 
                     // Build the Docker image with the determined image name
-                    sh "docker build -t $imageName ."
+                    sh "sudo docker build -t $imageName ."
                 }
             }
         }
@@ -46,10 +46,10 @@ pipeline {
 
                     if (targetEnvironment == 'main') {
                         // Run Docker container for 'main' branch
-                        sh "docker run -d --expose 3000 -p 3000:3000 nodemain:$imageTag"
+                        sh "sudo docker run -d --expose 3000 -p 3000:3000 nodemain:$imageTag"
                     } else if (targetEnvironment == 'dev') {
                         // Run Docker container for 'dev' branch
-                        sh "docker run -d --expose 3001 -p 3001:3000 nodedev:$imageTag"
+                        sh "sudo docker run -d --expose 3001 -p 3001:3000 nodedev:$imageTag"
                     } else {
                         error "Invalid target environment: $targetEnvironment"
                     }
