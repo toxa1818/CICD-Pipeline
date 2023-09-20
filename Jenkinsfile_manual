@@ -8,9 +8,6 @@ pipeline {
 
     stages {
         stage('Build Docker Image') {
-            when {
-                expression { currentBuild.parameters.targetEnvironment != null }
-            }
             steps {
                 script {
                     def targetEnvironment = currentBuild.parameters.targetEnvironment
@@ -34,9 +31,6 @@ pipeline {
         }
 
         stage('Run Docker Container') {
-            when {
-                expression { currentBuild.parameters.targetEnvironment != null }
-            }
             steps {
                 script {
                     def targetEnvironment = currentBuild.parameters.targetEnvironment
